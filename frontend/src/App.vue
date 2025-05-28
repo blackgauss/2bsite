@@ -1,6 +1,12 @@
 <template>
   <main class="container">
-    <div class="logo">2b.</div>
+    <div class="header-row">
+      <div class="logo">2b.</div>
+      <button class="donate-button" @click="showDonation = !showDonation">
+        💸
+      </button>
+    </div>
+
     <h1>this weekend with b.</h1>
 
     <div class="weekend">
@@ -11,7 +17,7 @@
       />
     </div>
 
-    <DonationBox />
+    <DonationBox v-if="showDonation" @close="showDonation = false" />
 
     <NewsBanner :items="newsItems" />
   </main>
@@ -30,6 +36,7 @@ export default {
   },
   data() {
     return {
+      showDonation: false,
       weekend: [
         {
           day: "Friday",
@@ -85,13 +92,46 @@ body {
   background-color: #000;
   font-family: system-ui, sans-serif;
   color: #fff;
-  padding-bottom: 3rem;
+  padding-bottom: 3rem; /* space for banner */
 }
 
 .container {
   padding: 1rem;
   max-width: 480px;
   margin: 0 auto;
+}
+
+.header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.logo {
+  font-size: 3rem;
+  font-weight: bold;
+  color: #fff;
+}
+
+.donate-button {
+  font-size: 1.5rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #fff;
+  transition: transform 0.2s ease;
+}
+
+.donate-button:hover {
+  transform: scale(1.2);
+}
+
+h1 {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  border-bottom: 1px solid #fff;
+  padding-bottom: 0.5rem;
   text-align: center;
 }
 
@@ -99,18 +139,5 @@ body {
   display: flex;
   flex-direction: column;
   gap: 1rem;
-}
-
-.logo {
-  font-size: 3rem;
-  font-weight: bold;
-  margin-bottom: 1rem;
-}
-
-h1 {
-  font-size: 2rem;
-  margin-bottom: 2rem;
-  border-bottom: 1px solid #fff;
-  padding-bottom: 0.5rem;
 }
 </style>
